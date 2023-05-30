@@ -5,18 +5,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>최고 평점 영화</title>
+  <title>인기영화 리스트</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div>
-    <h1>최고 평점 영화</h1>
+  <div class="title">
+    <h1>인기영화 검색</h1>
+    <form onsubmit="return false;">
+      <label>
+        <input id="search" type="text" onkeypress="enterKey()" placeholder=" 영화 제목을 입력하세요" autofocus>
+        <button id="btn" type="button" onclick="searchMovie()">검색</button>
+      </label>
+    </form>
   </div>
-  <form>
-    <input id="search" type="text" placeholder="영화 제목을 입력하세요">
-    <button id="btn" type="button" onclick="searchMovie()">검색</button>
-  </form>
   <div class="movie-list"></div>
 </body>
 <script src="app.js"></script>

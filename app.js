@@ -26,12 +26,13 @@ function movieList(rows) {
   rows.map((a) => {
     const temp = document.createElement('div');
     temp.innerHTML = `<div id="box" onclick="alertId(${a['id']})" style="cursor:pointer;" >
+    <div class='card'>
                       <img
                       src="https://image.tmdb.org/t/p/w500${a['poster_path']}">
-                      <div>${a['title']}</div>
-                      <p>${a['overview']}</p>
+                      <div class='card-title'>${a['title']}</div>
+                      <p class='card-overview'>${a['overview']}</p>
                       <p>${a['vote_average']}</p>
-                      <p id="id" style="display:none">${a['id']}'</p>
+                      </div>
                       </div>`;
     document.querySelector('.movie-list').append(temp);
   });
@@ -55,12 +56,13 @@ function searchMovie() {
         if (lowerTitle.includes(lowerInput)) {
           const temp = document.createElement('div');
           temp.innerHTML = `<div id="box" onclick="alertId(${a['id']})" style="cursor:pointer;">
+                            <div class='card'>
                             <img
                             src="https://image.tmdb.org/t/p/w500${a['poster_path']}">
-                            <div>${a['title']}</div>
-                            <p>${a['overview']}</p>
+                            <div class='card-title'>${a['title']}</div>
+                            <p class='card-overview'>${a['overview']}</p>
                             <p>${a['vote_average']}</p>
-                            <p id="${a[title]}" style="display:none">${a['id']}'</p>
+                            </div>
                             </div>`;
           document.querySelector('.movie-list').append(temp);
         }
@@ -70,4 +72,10 @@ function searchMovie() {
 
 let alertId = (a) => {
   alert(`영화 id : ${a}`);
+};
+
+let enterKey = () => {
+  if (window.event.keyCode == 13) {
+    searchMovie();
+  }
 };
