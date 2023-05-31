@@ -10,13 +10,14 @@ const options = {
 fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
   .then((response) => response.json())
   .then((response) => {
-    let rows = response['results'];
+    const rows = response['results'];
     movieList(rows);
   })
   .catch((err) => console.error(err));
 
+//카드 생성 함수
 function movieList(rows) {
-  rows.map((a, index) => {
+  rows.forEach((a, index) => {
     const temp = document.createElement('div');
     temp.setAttribute('class', 'movie-list');
     temp.setAttribute('id', `${index}`);
@@ -31,12 +32,14 @@ function movieList(rows) {
   });
 }
 
+//검색 기능
 function searchMovie() {
   let input = document.getElementById('search').value.toLowerCase(); //검색한 값
-  let cardTitle = document.getElementsByClassName('card-title'); //모든 영화 제목 HTML 가져오기
+  let title = document.getElementsByClassName('card-title'); //모든 영화 제목 HTML 가져오기, HTMLCollection
   let num = 0;
-  let titleArray = array(cardTitle);
+  let titleArray = array(title);
 
+  // HTMLCollection 객체를 배열로 반환
   function array(x) {
     let array = [];
     for (const a of x) {
@@ -46,6 +49,7 @@ function searchMovie() {
     return array;
   }
 
+  //검색한 값이 포함된 영화 제목이 있으면 display
   titleArray.forEach((a) => {
     if (a.includes(input)) {
       document.getElementById(`${num}`).setAttribute('style', 'display');
@@ -56,17 +60,20 @@ function searchMovie() {
     }
   });
 
+  //검색한 값이 포함된 영화가 없을 경우 alert
   if (titleArray.find((a) => a.includes(input)) == undefined) {
     alert('검색하신 영화가 없습니다!');
   }
 }
 
+//검색 버튼
 document.getElementById('btn').addEventListener('click', searchMovie);
 
 let alertId = (a) => {
   alert(`영화 id : ${a}`);
 };
 
+//enter 입력시 검색 기능 작동
 let enterKey = (e) => {
   if (e.code === 'Enter') {
     searchMovie();
