@@ -15,67 +15,60 @@ fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', opti
   })
   .catch((err) => console.error(err));
 
-// async function fetchMovie() {
-//   let response = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options);
-//   let data = await response.json();
-//   // return await data['results'];
-//   console.log(data['results']);
-// }
-
 function movieList(rows) {
-  rows.map((a) => {
+  rows.map((a, index) => {
     const temp = document.createElement('div');
+    temp.setAttribute('class', 'movie-list');
+    temp.setAttribute('id', `${index}`);
     temp.innerHTML = `<div id="box" onclick="alertId(${a['id']})" style="cursor:pointer;" >
-    <div class='card'>
                       <img
                       src="https://image.tmdb.org/t/p/w500${a['poster_path']}">
                       <div class='card-title'>${a['title']}</div>
                       <p class='card-overview'>${a['overview']}</p>
                       <p>${a['vote_average']}</p>
-                      </div>
                       </div>`;
-    document.querySelector('.movie-list').append(temp);
+    document.querySelector('.list').append(temp);
   });
 }
 
 function searchMovie() {
-  const div = document.querySelector('.movie-list');
-  while (div.firstChild) {
-    div.removeChild(div.firstChild);
+  let input = document.getElementById('search').value.toLowerCase(); //검색한 값
+  let cardTitle = document.getElementsByClassName('card-title'); //모든 영화 제목 HTML 가져오기
+  let num = 0;
+  let titleArray = array(cardTitle);
+
+  function array(x) {
+    let array = [];
+    for (const a of x) {
+      let title = a.innerText.toLowerCase();
+      array.push(title);
+    }
+    return array;
   }
-  let input = document.getElementById('search').value;
 
-  fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
-    .then((response) => response.json())
-    .then((response) => {
-      let rows = response['results'];
+  titleArray.forEach((a) => {
+    if (a.includes(input)) {
+      document.getElementById(`${num}`).setAttribute('style', 'display');
+      num++;
+    } else {
+      document.getElementById(`${num}`).setAttribute('style', 'display:none');
+      num++;
+    }
+  });
 
-      rows.forEach((a) => {
-        let lowerTitle = a['title'].toLowerCase();
-        let lowerInput = input.toLowerCase();
-        if (lowerTitle.includes(lowerInput)) {
-          const temp = document.createElement('div');
-          temp.innerHTML = `<div id="box" onclick="alertId(${a['id']})" style="cursor:pointer;">
-                            <div class='card'>
-                            <img
-                            src="https://image.tmdb.org/t/p/w500${a['poster_path']}">
-                            <div class='card-title'>${a['title']}</div>
-                            <p class='card-overview'>${a['overview']}</p>
-                            <p>${a['vote_average']}</p>
-                            </div>
-                            </div>`;
-          document.querySelector('.movie-list').append(temp);
-        }
-      });
-    });
+  if (titleArray.find((a) => a.includes(input)) == undefined) {
+    alert('검색하신 영화가 없습니다!');
+  }
 }
+
+document.getElementById('btn').addEventListener('click', searchMovie);
 
 let alertId = (a) => {
   alert(`영화 id : ${a}`);
 };
 
-let enterKey = () => {
-  if (window.event.keyCode == 13) {
+let enterKey = (e) => {
+  if (e.code === 'Enter') {
     searchMovie();
   }
 };

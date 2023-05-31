@@ -14,12 +14,12 @@
     <h1>인기영화 검색</h1>
     <form onsubmit="return false;">
       <label>
-        <input id="search" type="text" onkeypress="enterKey()" placeholder=" 영화 제목을 입력하세요" autofocus>
-        <button id="btn" type="button" onclick="searchMovie()">검색</button>
+        <input id="search" type="text" onkeypress="enterKey(event)" placeholder=" 영화 제목을 입력하세요" autofocus>
+        <button id="btn" type="button">검색</button>
       </label>
     </form>
   </div>
-  <div class="movie-list"></div>
+  <div class="list"></div>
 </body>
 <script src="app.js"></script>
 

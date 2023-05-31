@@ -19,6 +19,9 @@ input {
   border: none;
   margin-top: 30px;
 }
+input:focus {
+  outline: 2px solid rgb(80, 133, 255);
+}
 label {
   position: relative;
 }
@@ -41,23 +44,24 @@ button:hover {
   cursor: pointer;
 }
 
-.movie-list {
+.list {
   /* display: inline-flex; */
   margin: 0px auto 0px auto;
   text-align: center;
 }
 
-.movie-list > div {
+.list > div {
   display: inline-flex;
   margin: 50px 20px 30px 20px;
-  align-items: center;
 }
 #box {
   width: 350px;
   /* overflow: hidden; */
   border-radius: 8px;
-  transition: all 0.3s;
+  transition: 0.3s;
   box-shadow: 0 0px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  padding: 10px 10px 10px 10px;
+  border-radius: 8px;
 }
 
 #box:hover {
@@ -68,13 +72,10 @@ div > img {
   width: 325px;
   height: 455px;
   background-position: center;
+  border-radius: 8px;
+  margin-top: 10px;
 }
 
-.card {
-  padding: 10px 10px 10px 10px;
-  border: 10px;
-  border-radius: 8px;
-}
 .card-title {
   font-size: xx-large;
   font-weight: bolder;
