@@ -37,12 +37,7 @@ function searchMovie() {
   let input = document.getElementById('search').value.toLowerCase(); //검색한 값
   let title = document.getElementsByClassName('card-title'); //모든 영화 제목 HTML 가져오기, HTMLCollection
   let num = 0;
-  console.log(title);
-  let card = document.querySelectorAll('.movie-list');
-  console.log(card);
-  card.forEach((a) => {
-    console.log(a);
-  });
+
   let titleArray = array(title);
 
   // HTMLCollection 객체를 배열로 반환
