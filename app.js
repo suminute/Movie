@@ -37,6 +37,12 @@ function searchMovie() {
   let input = document.getElementById('search').value.toLowerCase(); //검색한 값
   let title = document.getElementsByClassName('card-title'); //모든 영화 제목 HTML 가져오기, HTMLCollection
   let num = 0;
+  console.log(title);
+  let card = document.querySelectorAll('.movie-list');
+  console.log(card);
+  card.forEach((a) => {
+    console.log(a);
+  });
   let titleArray = array(title);
 
   // HTMLCollection 객체를 배열로 반환
@@ -67,15 +73,8 @@ function searchMovie() {
 }
 
 //검색 버튼
-document.getElementById('btn').addEventListener('click', searchMovie);
+document.getElementById('btn').addEventListener('submit', searchMovie);
 
 let alertId = (a) => {
   alert(`영화 id : ${a}`);
-};
-
-//enter 입력시 검색 기능 작동
-let enterKey = (e) => {
-  if (e.code === 'Enter') {
-    searchMovie();
-  }
 };
